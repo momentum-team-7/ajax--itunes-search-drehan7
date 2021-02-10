@@ -33,11 +33,11 @@ document.addEventListener('click', e => {
 
         if (audioContainer.classList.contains('hide_div')) {
             audioContainer.classList.remove('hide_div')
+            muteAllSongs()
             musicPlayer.play();
         } else {
             audioContainer.classList.add('hide_div')
             musicPlayer.pause()
-            musicPlayer.autoplay = false;
         }
 
 
@@ -46,6 +46,14 @@ document.addEventListener('click', e => {
 
 
 
+
+function muteAllSongs() {
+    let allSongs = document.querySelectorAll('.music')
+
+    allSongs.forEach(function(audio) {
+        audio.pause();
+    })
+}
 
 function getSongs() {
     let tempURL = 'https://proxy-itunes-api.glitch.me/search?term='

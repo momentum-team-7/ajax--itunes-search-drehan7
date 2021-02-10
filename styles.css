@@ -13,11 +13,12 @@ span {
 }
 
 header {
-  border-bottom: 3px solid red;
+  border-bottom: 3px solid #1985a1;
+  color: white;
 }
 
 body {
-  background-color: #f7fff7;
+  background-color: #46494c;
 }
 
 .music-player {
@@ -44,14 +45,19 @@ figure {
   max-width: 60%;
   width: 20rem;
   height: fit-content;
-  background-color: #f7fff7;
-
+  background-color: #4c5c68;
+  color: white;
   text-align: center;
   border-radius: 10%;
   padding-top: 1%;
 }
+
+.song-container:hover {
+  opacity: 0.8;
+}
 .song-container img {
-  border: 2px solid red;
+  border: 2px solid #1985a1;
+  max-width: 100%;
   width: 60%;
   height: 60%;
   margin-bottom: 5%;
@@ -63,9 +69,13 @@ figure {
 
 .user-input-container {
   text-align: center;
-  border: 2px solid purple;
+  /* border: 2px solid purple; */
 }
 
+input {
+  border-radius: 40px;
+  padding-left: 1%;
+}
 .release-date {
   font-size: 14px;
   color: grey;
@@ -79,12 +89,12 @@ figure {
 
 .limit-input {
   height: 3rem;
-  width: 8rem;
+  width: 9rem;
   font-size: 20px;
 }
 
 .search-button {
-  background-color: #4361ee;
+  background-color: #1985a1;
   color: white;
   font-size: 20px;
   width: 5rem;
