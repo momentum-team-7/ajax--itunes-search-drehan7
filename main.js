@@ -16,16 +16,31 @@ form.addEventListener('submit', e => {
 
 function clearSongs() {
     let songs = document.querySelectorAll('.song-container')
+
     for (let song of songs) {
         song.remove();
-
     }
 }
 
 document.addEventListener('click', e => {
+
     if (e.target.className === "song-container" || e.target.className === "album-image") {
-        console.log("preview url " +e.target.parentElement.id)
-        audioPlayer.src = e.target.parentElement.id;
+        // console.log("preview url " +e.target.parentElement.id)
+        // audioPlayer.src = e.target.parentElement.id;
+        // audioPlayer.volume = .3;
+        let audioContainer = e.target.parentElement.querySelector(".music-container")
+        let musicPlayer = audioContainer.querySelector(".music")
+
+        if (audioContainer.classList.contains('hide_div')) {
+            audioContainer.classList.remove('hide_div')
+            musicPlayer.play();
+        } else {
+            audioContainer.classList.add('hide_div')
+            musicPlayer.pause()
+            musicPlayer.autoplay = false;
+        }
+
+
     }
 })
 
@@ -36,9 +51,17 @@ function getSongs() {
     let tempURL = 'https://proxy-itunes-api.glitch.me/search?term='
     // let userInput = formatSearchString(document.querySelector(".user-input").value);
     let userInput = document.querySelector(".user-input").value
+    let limit;
+    let userLimitInput = parseInt(document.querySelector(".limit-input").value);
+    if (userLimitInput > 0) {
+        limit = userLimitInput
+    } else {
+        limit = 25;
+    }
+
 
     // Hard code a limit for now
-    fetch (url + userInput + "&limit=15&media=music")
+    fetch (url + userInput + "&limit=" + limit + "&media=music")
         .then(res => res.json())
         .then(data => {
             console.log(data);
@@ -52,7 +75,10 @@ function getSongs() {
             //     renderSong(song);
             // }
         })
+
+    userInput = "";
 }
+
 
 
 function renderSong(song) {
@@ -83,8 +109,24 @@ function renderSong(song) {
     let newDate = new Date(song.releaseDate)
     releaseDate.innerHTML = "Released: "+newDate.toLocaleDateString();
 
+    
+    let musicContainer = document.createElement('div');
+    musicContainer.className = 'music-container';
+    musicContainer.classList.add('hide_div')
+    let figure = document.createElement('figure');
+    
+    let audio = document.createElement('audio');
+    audio.className = 'music'
+    audio.volume = .3;
+    audio.src = song.previewUrl;
+    audio.controls = true;
+    figure.appendChild(audio)
+
+    musicContainer.appendChild(figure);
+
 
     songContainer.appendChild(albumImg);
+    songContainer.appendChild(musicContainer);
     songContainer.appendChild(songTrackName);
     songContainer.appendChild(albumTitle);
     songContainer.appendChild(artistName);
