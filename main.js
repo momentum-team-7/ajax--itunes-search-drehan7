@@ -77,11 +77,20 @@ function muteAllSongs() {
     })
 }
 
+function titleCaseSearch(search) {
+    let names = search.split(' ');
+    for (let i = 0; i < names.length; i++) {
+        names[i] = names[i][0].toUpperCase() + names[i].slice(1);
+    }
+
+    return names;
+}
+
 function getSongs(limit=25) {
     let tempURL = 'https://proxy-itunes-api.glitch.me/search?term='
     // let userInput = formatSearchString(document.querySelector(".user-input").value);
     // let limit;
-    let userInput = document.querySelector(".user-input").value
+    let userInput = titleCaseSearch(document.querySelector(".user-input").value)
     let userLimitInput = parseInt(document.querySelector(".limit-input").value);
     if (userLimitInput > 0) {
         limit = userLimitInput
