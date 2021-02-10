@@ -89,7 +89,7 @@ function getSongs(limit=25) {
 
 
     // Hard code a limit for now
-    fetch (url + userInput + "&limit=" + limit + "&media=music")
+    fetch (tempURL + userInput + "&limit=" + limit + "&media=music")
         .then(res => res.json())
         .then(data => {
             console.log(data);
