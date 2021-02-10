@@ -2,6 +2,8 @@ const url = 'https://itunes.apple.com/search?term=';
 let resultContainer = document.querySelector(".all-results");
 let audioPlayer = document.querySelector('audio')
 
+let topButton = document.querySelector(".back-top-button");
+
 let form = document.querySelector("form");
 
 
@@ -14,13 +16,12 @@ form.addEventListener('submit', e => {
 })
 
 
-function clearSongs() {
-    let songs = document.querySelectorAll('.song-container')
+topButton.addEventListener('click', e => {
+    document.documentElement.scrollTop = 0;
+    muteAllSongs();
+})
 
-    for (let song of songs) {
-        song.remove();
-    }
-}
+
 
 document.addEventListener('click', e => {
 
@@ -46,6 +47,14 @@ document.addEventListener('click', e => {
 
 
 
+////////////////////////////////////////////////////////////////
+function clearSongs() {
+    let songs = document.querySelectorAll('.song-container')
+
+    for (let song of songs) {
+        song.remove();
+    }
+}
 
 function muteAllSongs() {
     let allSongs = document.querySelectorAll('.music')
@@ -85,6 +94,8 @@ function getSongs() {
         })
 
     userInput = "";
+    let searchResultsText = document.querySelector('span')
+    searchResultsText.innerHTML = `Search Results: ${limit} songs`
 }
 
 
@@ -122,7 +133,6 @@ function renderSong(song) {
     musicContainer.className = 'music-container';
     musicContainer.classList.add('hide_div')
     let figure = document.createElement('figure');
-    
     let audio = document.createElement('audio');
     audio.className = 'music'
     audio.volume = .3;
@@ -130,7 +140,13 @@ function renderSong(song) {
     audio.controls = true;
     figure.appendChild(audio)
 
+
+
+
+
     musicContainer.appendChild(figure);
+
+
 
 
     songContainer.appendChild(albumImg);
