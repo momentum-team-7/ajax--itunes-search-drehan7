@@ -3,6 +3,7 @@ let resultContainer = document.querySelector(".all-results");
 let audioPlayer = document.querySelector('audio')
 
 let topButton = document.querySelector(".back-top-button");
+let moreButton = document.querySelector(".load-more-button");
 
 let form = document.querySelector("form");
 
@@ -21,6 +22,18 @@ topButton.addEventListener('click', e => {
     muteAllSongs();
 })
 
+moreButton.addEventListener('click', e => {
+    clearSongs();
+    try {
+        let limit = parseInt(document.querySelector('span').innerHTML.split(" ")[2])
+
+        console.log('limit',limit+25)
+        getSongs(limit+25)
+    } catch (error) {
+        console.log(error)
+    }
+
+})
 
 
 document.addEventListener('click', e => {
@@ -64,17 +77,15 @@ function muteAllSongs() {
     })
 }
 
-function getSongs() {
+function getSongs(limit=25) {
     let tempURL = 'https://proxy-itunes-api.glitch.me/search?term='
     // let userInput = formatSearchString(document.querySelector(".user-input").value);
+    // let limit;
     let userInput = document.querySelector(".user-input").value
-    let limit;
     let userLimitInput = parseInt(document.querySelector(".limit-input").value);
     if (userLimitInput > 0) {
         limit = userLimitInput
-    } else {
-        limit = 25;
-    }
+    } 
 
 
     // Hard code a limit for now

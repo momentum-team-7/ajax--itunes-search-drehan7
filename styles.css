@@ -5,6 +5,11 @@
   font-family: "Quicksand", sans-serif;
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
 span {
   border-bottom: 2px dotted rgb(170, 169, 169);
   width: 100%;
@@ -54,6 +59,7 @@ figure {
 
 .song-container:hover {
   opacity: 0.8;
+  border: 1px dashed blue;
 }
 .song-container img {
   border: 2px solid #1985a1;
@@ -93,7 +99,14 @@ input {
   font-size: 20px;
 }
 
-.back-top-button {
+.bottom-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.back-top-button,
+.load-more-button {
+  display: block;
   background-color: red;
   font-family: "Quicksand", sans-serif;
   font-size: 25px;
@@ -101,6 +114,11 @@ input {
   width: 7%;
   color: white;
   font-weight: 500;
+}
+
+.load-more-button {
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .search-button {
